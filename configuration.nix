@@ -137,6 +137,7 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
       # };
       buildInputs = oldAttrs.buildInputs ++ [ harfbuzz ];
   }))
+  nix-search-cli
   fzf
   ueberzugpp
   acpilight
@@ -149,13 +150,16 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   exfatprogs
   nsxiv
   xwallpaper
-  ffmpeg
+  (ffmpeg.override {
+     withXcb = true;
+   })
   ffmpegthumbnailer
   gnome-keyring
   python313Packages.qdarkstyle
   mdp
   mpc
   mpv
+  xorg.xdpyinfo
   ncmpcpp
   maim
   unzip
@@ -173,8 +177,47 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   lynx
   slock
   tesseract
+  coreutils
   moreutils
+  networkmanager
+  pwvucontrol
+  pass
+  htop-vim
+  tree
+  pstree
   ];
+
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-gtk2;
+    settings = {
+      no-allow-external-cache = true;
+      allow-preset-passphrase = true;
+      max-cache-ttl = 86400;
+      };
+  };
+
+  security.sudo = {
+  enable = true;
+  extraRules = [{
+    commands = [
+      {
+        command = "/run/wrappers/bin/umount";
+        options = [ "NOPASSWD" ];
+      }
+      {
+        command = "/run/wrappers/bin/mount";
+        options = [ "NOPASSWD" ];
+      }
+    ];
+    groups = [ "wheel" ];
+  }];
+  extraConfig = with pkgs; ''
+    Defaults:picloud secure_path="${lib.makeBinPath [
+      systemd
+    ]}:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin"
+  '';
+};
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -215,4 +258,3 @@ users.defaultUserShell = pkgs.zsh;
   system.stateVersion = "24.11"; # Did you read the comment?
 
 }
-
