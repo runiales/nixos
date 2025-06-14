@@ -202,8 +202,8 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
     enable = true;
     pinentryPackage = pkgs.pinentry-gtk2;
     settings = {
-      no-allow-external-cache = true;
-      allow-preset-passphrase = true;
+      no-allow-external-cache = "";
+      allow-preset-passphrase = "";
       max-cache-ttl = 86400;
       };
   };
@@ -314,6 +314,21 @@ programs.zsh = {
         };
       };
     };
+
+   i18n.inputMethod = {
+     type = "fcitx5";
+     enable = true;
+     fcitx5.addons = with pkgs; [
+       fcitx5-chinese-addons  # table input method support
+     ];
+   };
+
+fonts.packages = with pkgs; [
+  source-han-sans
+  fira-code
+  fira-code-symbols
+];
+
 
 nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
