@@ -18,6 +18,7 @@ let # se utiliza en la config de firefox
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./boot.nix
     ];
 
 security.rtkit.enable = true;
@@ -27,13 +28,7 @@ services.pipewire = {
   alsa.support32Bit = true;
   jack.enable = true;
   pulse.enable = true;
-  # If you want to use JACK applications, uncomment this
 };
-
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  # boot.kernelModules = ["snd-seq" "snd-rawmidi" ];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -47,6 +42,8 @@ services.pipewire = {
 
   # Set your time zone.
   time.timeZone = "Europe/Madrid";
+
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
 
   # Select internationalisation properties.
   i18n.defaultLocale = "es_ES.UTF-8";
@@ -64,7 +61,6 @@ services.pipewire = {
   };
 
 
-
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils}/bin/chgrp video $sys$devpath/brightness", RUN+="${pkgs.coreutils}/bin/chmod g+w $sys$devpath/brightness"
     '';
@@ -74,6 +70,8 @@ services.pipewire = {
     layout = "es";
     variant = "";
   };
+
+services.getty.autologinUser = "runiales";
 
 services.xserver.windowManager.dwm.package = pkgs.dwm.overrideAttrs {
   src = /home/runiales/.local/src/dwm;
@@ -112,20 +110,10 @@ environment.localBinInPath = true;
 nixpkgs.overlays = [ (final: prev:
 {
 dwmblocks = prev.dwmblocks.overrideAttrs (old: {
-    # src = /home/runiales/dwmblocks;
-    src = prev.fetchgit {
-      url = "https://github.com/runiales/dwmblocks";
-      hash = "sha256-LJBIX3R0r9A9DwuGxxr6eWtvX0EeGu5mShb58RQt6ZQ=";
-      # hash = "sha256-mjAdZCkHCqtkoM4eSDZkL8XX38QRnsPf+jNLB5tMkyY=";
-      # url = "https://github.com/lukesmithxyz/dwmblocks";
-      # hash = "sha256-gT2PXaQ0VdqlA77jpoXBjuFM5UTuGiIZ5eYzXFVm9TU=";
-     };
-     });
+    src = /home/runiales/.local/src/dwmblocks;
+      });
 }
 ) ];
-
-
-
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -141,10 +129,6 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   dwmblocks
   (st.overrideAttrs (oldAttrs: rec {
     src = /home/runiales/.local/src/st;
-    # src = fetchgit {
-    #   url = "https://github.com/runiales/st";
-    #   hash = "sha256-+D6zHYiGG0y0n9BZvN/FT6hGrTQ4PxXNtk8RDA0ZNeA=";
-      # };
       buildInputs = oldAttrs.buildInputs ++ [ harfbuzz ];
   }))
   nix-search-cli
@@ -196,6 +180,9 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   tree
   pstree
   wget
+  whatsie
+  telegram-desktop
+  gh
   ];
 
   programs.gnupg.agent = {
@@ -239,10 +226,8 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   # };
 
 programs.zsh = {
-  enable = true;
-  enableCompletion = true;
-  autosuggestions.enable = true;
   syntaxHighlighting.enable = true;
+  enable = true;
 };
 
   programs.firefox = {
@@ -311,6 +296,21 @@ programs.zsh = {
           "browser.newtabpage.activity-stream.showSponsored" = lock-false;
           "browser.newtabpage.activity-stream.system.showSponsored" = lock-false;
           "browser.newtabpage.activity-stream.showSponsoredTopSites" = lock-false;
+        };
+	profiles.default = {
+          name = "default";
+          bookmarks = [
+            {
+              name = "NixOS Search";
+              url = "https://search.nixos.org/packages?query=%s";
+              keyword = "nix";
+            }
+            {
+              name = "Nix Options Search";
+              url = "https://search.nixos.org/options?query=%s";
+              keyword = "nixo";
+            }
+          ];
         };
       };
     };
