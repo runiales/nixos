@@ -188,6 +188,7 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   lm_sensors #para temperatura cpu
   transmission_4-qt
   ntfs3g
+  poppler-utils
   ];
 
   programs.gnupg.agent = {
