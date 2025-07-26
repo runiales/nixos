@@ -111,7 +111,7 @@ nixpkgs.overlays = [ (final: prev:
 {
 dwmblocks = prev.dwmblocks.overrideAttrs (old: {
     src = /home/runiales/.local/src/dwmblocks;
-      });
+     });
 }
 ) ];
 
@@ -183,6 +183,11 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   whatsie
   telegram-desktop
   gh
+  autorandr
+  arandr
+  lm_sensors #para temperatura cpu
+  transmission_4-qt
+  ntfs3g
   ];
 
   programs.gnupg.agent = {
@@ -216,6 +221,15 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
     ]}:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin"
   '';
 };
+
+programs.virt-manager.enable = true;
+
+users.groups.libvirtd.members = ["runiales"];
+
+virtualisation.libvirtd.enable = true;
+
+virtualisation.spiceUSBRedirection.enable = true;
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -287,6 +301,7 @@ programs.zsh = {
           "browser.search.suggest.enabled.private" = lock-false;
           "browser.urlbar.suggest.searches" = lock-false;
           "browser.urlbar.showSearchSuggestionsFirst" = lock-false;
+          "browser.translations.automaticallyPopup" = lock-false;
           "browser.newtabpage.activity-stream.feeds.section.topstories" = lock-false;
           "browser.newtabpage.activity-stream.feeds.snippets" = lock-false;
           "browser.newtabpage.activity-stream.section.highlights.includePocket" = lock-false;
@@ -319,7 +334,7 @@ programs.zsh = {
      type = "fcitx5";
      enable = true;
      fcitx5.addons = with pkgs; [
-       fcitx5-chinese-addons  # table input method support
+       fcitx5-chinese-addons
      ];
    };
 
