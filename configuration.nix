@@ -121,7 +121,6 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   vim
   neovim
   dmenu
-  firefox
   git
   gnumake
   zsh
@@ -271,6 +270,77 @@ programs.zsh = {
         SearchBar = "unified";
         NewTabPage = false;
 
+SearchEngines = {
+Add = [
+	{
+		Alias = "np";
+		Description = "Search in NixOS Packages";
+		IconURL = "https://nixos.org/favicon.png";
+		Method = "GET";
+		Name = "NixOS Packages";
+		URLTemplate = "https://search.nixos.org/packages?from=0&size=200&sort=relevance&type=packages&query={searchTerms}";
+	}
+	{
+		Alias = "aw";
+		Name = "Arch Wiki";
+		URLTemplate = "https://wiki.archlinux.org/index.php?title=Special%3ASearch&wprov=acrw1_-1&search={searchTerms}";
+	}
+	{
+		Alias = "@no";
+		Description = "Search in NixOS Options";
+		IconURL = "https://nixos.org/favicon.png";
+		Method = "GET";
+		Name = "NixOS Options";
+		URLTemplate = "https://search.nixos.org/options?from=0&size=200&sort=relevance&type=packages&query={searchTerms}";
+	}
+	{
+		Alias = "wi";
+		Name = "Wikipedia Inglés";
+		URLTemplate = "https://en.wikipedia.org/w/index.php?title=Special%3ASearch&wprov=acrw1_-1&search={searchTerms}";
+	}
+	{
+		Alias = "we";
+		Name = "Wikipedia Español";
+		URLTemplate = "https://es.wikipedia.org/w/index.php?title=Especial%3ABuscar&wprov=acrw1_-1&search={searchTerms}";
+	}
+	{
+		Alias = "d";
+		Name = "DLE RAE";
+		URLTemplate = "https://dle.rae.es/?m=form&w={searchTerms}";
+	}
+	{
+		Alias = "dd";
+		Name = "D. Panhispánico de dudas";
+		URLTemplate = "https://www.rae.es/dpd/#{searchTerms}";
+	}
+	{
+		Alias = "gt";
+		Name = "Google Translate";
+		URLTemplate = "https://translate.google.com/?sl=auto&tl=es&text={searchTerms}";
+	}
+	{
+		Alias = "gm";
+		Name = "Google Maps";
+		URLTemplate = "https://www.google.com/maps?authuser=0&q={searchTerms}";
+	}
+	# {
+	# 	Alias = "(<>)";
+	# 	Name = "(<>)";
+	# 	URLTemplate = "(<>){searchTerms}";
+	# }
+	# {
+	# 	Alias = "(<>)";
+	# 	Name = "(<>)";
+	# 	URLTemplate = "(<>){searchTerms}";
+	# }
+	# {
+	# 	Alias = "(<>)";
+	# 	Name = "(<>)";
+	# 	URLTemplate = "(<>){searchTerms}";
+	# }
+];
+};
+
         /* ---- EXTENSIONS ---- */
         # Check about:support for extension/add-on ID strings.
         # Valid strings for installation_mode are "allowed", "blocked",
@@ -312,21 +382,6 @@ programs.zsh = {
           "browser.newtabpage.activity-stream.showSponsored" = lock-false;
           "browser.newtabpage.activity-stream.system.showSponsored" = lock-false;
           "browser.newtabpage.activity-stream.showSponsoredTopSites" = lock-false;
-        };
-	profiles.default = {
-          name = "default";
-          bookmarks = [
-            {
-              name = "NixOS Search";
-              url = "https://search.nixos.org/packages?query=%s";
-              keyword = "nix";
-            }
-            {
-              name = "Nix Options Search";
-              url = "https://search.nixos.org/options?query=%s";
-              keyword = "nixo";
-            }
-          ];
         };
       };
     };
