@@ -323,11 +323,11 @@ Add = [
 		Name = "Google Maps";
 		URLTemplate = "https://www.google.com/maps?authuser=0&q={searchTerms}";
 	}
-	# {
-	# 	Alias = "(<>)";
-	# 	Name = "(<>)";
-	# 	URLTemplate = "(<>){searchTerms}";
-	# }
+	{
+		Alias = "yt";
+		Name = "Youtube";
+		URLTemplate = "https://www.youtube.com/results?search_query={searchTerms}";
+	}
 	# {
 	# 	Alias = "(<>)";
 	# 	Name = "(<>)";
