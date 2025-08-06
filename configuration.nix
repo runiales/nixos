@@ -188,6 +188,9 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   transmission_4-qt
   ntfs3g
   poppler-utils
+  wine
+  bluej
+  syncthing
   ];
 
   programs.gnupg.agent = {
@@ -328,11 +331,11 @@ Add = [
 		Name = "Youtube";
 		URLTemplate = "https://www.youtube.com/results?search_query={searchTerms}";
 	}
-	# {
-	# 	Alias = "(<>)";
-	# 	Name = "(<>)";
-	# 	URLTemplate = "(<>){searchTerms}";
-	# }
+	{
+		Alias = "fr";
+		Name = "Wordreference Francés";
+		URLTemplate = "https://www.wordreference.com/redirect/translation.aspx?dict=esfr&w={searchTerms}";
+	}
 	# {
 	# 	Alias = "(<>)";
 	# 	Name = "(<>)";
@@ -351,11 +354,13 @@ Add = [
           "uBlock0@raymondhill.net" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
             installation_mode = "force_installed";
+	    private_browsing = true;
           };
           # vimium
           "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/vimium-ff/latest.xpi";
             installation_mode = "force_installed";
+	    private_browsing = true;
           };
         };
 
