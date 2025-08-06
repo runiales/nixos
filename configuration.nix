@@ -190,7 +190,6 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   poppler-utils
   wine
   bluej
-  syncthing
   ];
 
   programs.gnupg.agent = {
