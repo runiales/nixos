@@ -190,7 +190,17 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   poppler-utils
   wine
   bluej
+  gsettings-desktop-schemas #para bluej
+  glib#bluej
+  gruvbox-dark-gtk
   ];
+
+  programs.slock.enable = true;
+
+   #fixtemporal para bluej
+   environment.variables = rec {
+    GSETTINGS_SCHEMA_DIR="${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}/glib-2.0/schemas";
+  };
 
   programs.gnupg.agent = {
     enable = true;
@@ -334,6 +344,11 @@ Add = [
 		Alias = "fr";
 		Name = "Wordreference Francés";
 		URLTemplate = "https://www.wordreference.com/redirect/translation.aspx?dict=esfr&w={searchTerms}";
+	}
+	{
+		Alias = "nw";
+		Name = "NixOS Wiki";
+		URLTemplate = "https://nixos.wiki/index.php?search={searchTerms}";
 	}
 	# {
 	# 	Alias = "(<>)";
