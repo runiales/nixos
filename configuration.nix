@@ -193,6 +193,9 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   gsettings-desktop-schemas #para bluej
   glib#bluej
   gruvbox-dark-gtk
+  texliveFull
+  atool
+  zip
   ];
 
   programs.slock.enable = true;
