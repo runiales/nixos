@@ -196,6 +196,10 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   texliveFull
   atool
   zip
+  nsxiv
+  thunderbird
+  anki
+  usbutils
   ];
 
   programs.slock.enable = true;
@@ -214,6 +218,8 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
       max-cache-ttl = 86400;
       };
   };
+
+services.printing.enable = true;
 
   security.sudo = {
   enable = true;
