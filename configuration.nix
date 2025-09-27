@@ -196,6 +196,8 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   texliveFull
   atool
   zip
+  thunderbird
+  libreoffice
   ];
 
   programs.slock.enable = true;
