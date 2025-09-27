@@ -197,9 +197,10 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   atool
   zip
   nsxiv
-  thunderbird
   anki
   usbutils
+  thunderbird
+  libreoffice
   ];
 
   programs.slock.enable = true;
