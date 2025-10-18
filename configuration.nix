@@ -201,6 +201,10 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   usbutils
   thunderbird
   libreoffice
+  gcc
+  sxiv
+  tor-browser
+  calibre
   ];
 
   programs.slock.enable = true;
