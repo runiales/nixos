@@ -201,6 +201,9 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   usbutils
   thunderbird
   libreoffice
+  musescore
+  usbutils
+  kdePackages.okular
   gcc
   sxiv
   tor-browser
