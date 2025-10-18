@@ -198,6 +198,13 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   zip
   thunderbird
   libreoffice
+  musescore
+  usbutils
+  kdePackages.okular
+  gcc
+  sxiv
+  tor-browser
+  calibre
   ];
 
   programs.slock.enable = true;
