@@ -208,6 +208,7 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   sxiv
   tor-browser
   calibre
+  syncthing
   ];
 
   programs.slock.enable = true;
