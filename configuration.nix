@@ -208,7 +208,6 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   sxiv
   tor-browser
   calibre
-  syncthing
   ];
 
   programs.slock.enable = true;
@@ -229,6 +228,13 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   };
 
 services.printing.enable = true;
+services.syncthing = {
+  enable = true;
+  group = "users";
+  user = "runiales";
+  dataDir = "/home/runiales/sync";
+  configDir = "/home/runiales/.config/syncthing";
+};
 
   security.sudo = {
   enable = true;
