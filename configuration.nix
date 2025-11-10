@@ -431,11 +431,28 @@ Add = [
      ];
    };
 
-fonts.packages = with pkgs; [
-  source-han-sans
-  fira-code
-  fira-code-symbols
-];
+#----=[ Fonts ]=----#
+fonts = {
+  enableDefaultPackages = true;
+  packages = with pkgs; [
+    source-han-sans
+    source-han-mono
+    source-han-serif
+    fira-code
+    fira-code-symbols
+    libertine
+  ];
+
+  fontconfig = {
+    defaultFonts = {
+      serif = [  "Linux Libertine" "Source Han Serif" ];
+      sansSerif = [ "Linux Biolinum" "Source Han Sans" ];
+      monospace = [ "Fira Code" "Source Han Mono"];
+    };
+  };
+  fontDir.enable = true;
+};
+
 
 
 nix.settings.experimental-features = [ "nix-command" "flakes" ];
