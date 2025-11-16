@@ -161,6 +161,7 @@ dwmblocks = prev.dwmblocks.overrideAttrs (old: {
   xdotool
   yt-dlp
   zathura
+  ghostscript
   poppler
   mediainfo
   atool
